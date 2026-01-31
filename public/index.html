@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Secure Chat – Login</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* LOGIN PAGE OVERRIDE */
+
+    body.login-dark {
+      background: #18191c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #fff;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .login-card {
+      width: 420px;
+      padding: 30px;
+      border-radius: 12px;
+      background: rgba(32, 34, 37, 0.85);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity:1; transform: translateY(0);} }
+
+    .login-card h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 26px;
+      color: #fff;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: #2f3136;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .login-card input:focus {
+      border: 1px solid #7289da;
+    }
+
+    .login-card button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #5865f2;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .login-card button:hover {
+      background: #4752c4;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 20px 0;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .success {
+      text-align: center;
+      color: #43b581;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    .error {
+      text-align: center;
+      color: #f04747;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body class="login-dark">
+
+  <div class="login-card">
+
+    <h1>Secure Chat Login</h1>
+
+    <h3 style="margin-bottom:5px;">Join Room</h3>
+    <input id="jroom" placeholder="Room Name">
+    <input id="jname" placeholder="Your Name">
+    <input id="jpass" placeholder="Room Password" type="password">
+    <button id="joinBtn">Join Room</button>
+    <div id="joinStatus"></div>
+
+    <div class="divider">or</div>
+
+    <h3 style="margin-bottom:5px;">Create Room</h3>
+    <input id="croom" placeholder="New Room Name">
+    <input id="ccreator" placeholder="Your Name">
+    <input id="cpass" placeholder="Room Password" type="password">
+    <button id="createBtn">Create Room</button>
+    <div id="createStatus"></div>
+
+  </div>
+
+  <script>
+    async function post(url, body){
+      const res = await fetch(url, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(body)
+      });
+      return res.json();
+    }
+
+    // Create room
+    createBtn.onclick = async () => {
+      const room = croom.value.trim(), creator = ccreator.value.trim(), password = cpass.value.trim();
+      const status = document.getElementById("createStatus");
+
+      if(!room||!creator||!password) {
+        status.innerHTML = "<div class='error'>Fill all fields</div>";
+        return;
+      }
+
+      const r = await post('/create-room',{ room, password, creator });
+      if(r.error){
+        status.innerHTML = `<div class='error'>${r.error}</div>`;
+      } else {
+        status.innerHTML = "<div class='success'>Room Created!</div>";
+      }
+    };
+
+    // Join room
+    joinBtn.onclick = async () => {
+      const room = jroom.value.trim(), username = jname.value.trim(), password = jpass.value.trim();
+      const status = document.getElementById("joinStatus");
+
+      if(!room||!username||!password){
+        status.innerHTML = "<div class='error'>Fill all fields</div>";
+        return;
+      }
+
+      const r = await post('/validate',{ room, password, username });
+      if(r.error){
+        status.innerHTML = `<div class='error'>${r.error}</div>`;
+      } else {
+        sessionStorage.setItem('e2ee_room', room);
+        sessionStorage.setItem('e2ee_username', username);
+        sessionStorage.setItem('e2ee_password', password);
+        location.href = "/chat.html";
+      }
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Chat</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="discord-dark">
+
+  <div class="discord-container">
+
+    <aside class="discord-sidebar">
+      <div class="sidebar-header">
+        <h2 id="roomName">Room</h2>
+      </div>
+
+      <div class="sidebar-users" id="users"></div>
+    </aside>
+
+    <main class="discord-main">
+      <div id="messages" class="discord-messages"></div>
+
+      <form id="form" class="discord-input-bar">
+        <input id="msg" placeholder="Message…" autocomplete="off" />
+        <button>Send</button>
+      </form>
+    </main>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/client.js"></script>
+</body>
+</html>

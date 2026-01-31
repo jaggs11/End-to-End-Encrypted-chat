@@ -1,0 +1,113 @@
+/* DISCORD DARK MODE THEME */
+
+body.discord-dark {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #2f3136;
+  color: #fff;
+}
+
+/* LAYOUT */
+
+.discord-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* SIDEBAR */
+
+.discord-sidebar {
+  width: 260px;
+  background: #202225;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #18191c;
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #18191c;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.sidebar-users {
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.sidebar-users div {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #292b2f;
+  border-radius: 6px;
+}
+
+/* MAIN CHAT AREA */
+
+.discord-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.discord-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.msg-bubble {
+  max-width: 60%;
+  padding: 12px 15px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  line-height: 1.4;
+}
+
+.me {
+  background: #7289da;
+  margin-left: auto;
+}
+
+.other {
+  background: #36393f;
+  margin-right: auto;
+}
+
+.sys-msg {
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+  margin: 15px 0;
+}
+
+/* INPUT BAR */
+
+.discord-input-bar {
+  display: flex;
+  padding: 15px;
+  background: #40444b;
+  border-top: 1px solid #18191c;
+}
+
+.discord-input-bar input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  background: #303339;
+  color: white;
+}
+
+.discord-input-bar button {
+  margin-left: 10px;
+  padding: 12px 18px;
+  background: #7289da;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
