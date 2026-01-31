@@ -1,2 +1,27 @@
-# end-to-end-encrypted-chat
-A secure real-time chat application built with Node.js, Socket.IO and MongoDB. Messages are end-to-end encrypted using AES on the client side, while room passwords are stored as bcrypt hashes. The server stores only encrypted messages and never sees plaintext data.
+# End-to-End Encrypted Chat Application
+
+This is a secure real-time chat application built using Node.js, Express, Socket.IO and MongoDB.
+
+## Features
+- End-to-end encrypted messaging (AES)
+- Room-based chat system
+- Hashed room passwords using bcrypt
+- Encrypted messages stored in MongoDB
+- Real-time communication using Socket.IO
+- Modern Discord-style UI
+
+## Technologies Used
+- Node.js
+- Express.js
+- Socket.IO
+- MongoDB (Mongoose)
+- CryptoJS (AES encryption)
+- bcrypt (password hashing)
+
+## How to Run
+1. Install Node.js and MongoDB
+2. Clone the repository
+3. Run:
+   ```bash
+   npm install
+   node server.js
